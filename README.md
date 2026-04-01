@@ -36,7 +36,9 @@ berlin-restaurant-market-analysis/
 Business Recommendations
 A structured onboarding campaign targeting Berlin's 4,354 unclaimed restaurant partners would be the single highest-leverage intervention available to any food delivery platform operating here. The data makes the case with statistical certainty.
 Cuisine diversification, specifically prioritising Asian and Indian restaurant acquisition, represents the clearest secondary opportunity where customer satisfaction already runs highest.
+
 Author
+
 Siddharth Suman
 Data Analyst, Berlin
 linkedin.com/in/siddharthsuman06
