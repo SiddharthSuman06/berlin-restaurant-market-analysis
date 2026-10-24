@@ -1,6 +1,6 @@
 # Berlin Restaurant Market Analysis
 
-Berlin has around 6,600 rated restaurants on TripAdvisor, and two thirds of them have never claimed their page. I wanted to see what separates the well-rated ones from the rest, and what that might mean for delivery platforms like Wolt, Lieferando or Delivery Hero that work with these restaurants every day.
+Berlin has around 6,500 rated restaurants on TripAdvisor, and two thirds of them have never claimed their page. I wanted to see what separates the well-rated ones from the rest, and what that might mean for delivery platforms like Wolt, Lieferando or Delivery Hero that work with these restaurants every day.
 
 I spent years in kitchens and advising restaurant owners before moving into data, so this one is close to home.
 
@@ -9,14 +9,14 @@ I spent years in kitchens and advising restaurant owners before moving into data
 ## What I found
 
 **1. Claimed restaurants get far more reviews, and slightly better ratings.**
-Restaurants that have claimed their TripAdvisor page get about 3.4x more reviews (around 162 vs 48). Their average rating is 0.14 stars higher (4.25 vs 4.10). That gap is statistically clear but small: Cohen's d is around 0.2, and the two distributions overlap almost completely.
+Restaurants that have claimed their TripAdvisor page get about 3.4x more reviews (around 163 vs 48). Their average rating is 0.14 stars higher (4.24 vs 4.11). That gap is statistically clear but small: Cohen's d is around 0.2, and the two distributions overlap almost completely.
 
 This is a comparison, not an experiment. Popular restaurants may simply be more likely to claim their page, so I can't say claiming causes the difference.
 
 ![Claimed vs unclaimed](2_claimed_vs_unclaimed.png)
 
-**2. Service, food and value all go together with higher ratings. Atmosphere much less so.**
-The three are about equally linked to the overall rating. Atmosphere has a much weaker link. A simple place with good service and fair prices does just as well as a beautiful one.
+**2. Food, service and value all go together with higher ratings. Atmosphere much less so.**
+All three correlate strongly with the overall rating (0.71 to 0.77). Atmosphere is clearly weaker (0.43). Good food, service and fair prices seem to count for more than a nice room.
 
 ![Correlation matrix](5_correlation_matrix.png)
 
@@ -42,9 +42,9 @@ Mustafa's Gemuese Kebab, a cheap street food stand, is the fourth most-reviewed 
 
 I went back through the notebook and fixed a few things. The notebook has a note at each fix:
 
-- I originally wrote that claimed restaurants rate "14% higher". The gap is 0.14 stars, which is about 3.5%.
+- I originally wrote that claimed restaurants rate "14% higher". The gap is 0.14 stars, which is about 3.4%.
 - The Berlin filter was also picking up a town called Berlingen.
-- I had filled missing food, service, value and atmosphere scores with the median before running correlations. About half were missing, so that flattened the results. Now the correlations only use real scores.
+- I had filled missing food, service, value and atmosphere scores with the median before running correlations. About half were missing, so that flattened the results: the main correlations were around 0.4. Using only real scores, they're around 0.75.
 - Cuisine matching used partial text matches, so "European" also counted "Central European". It now matches exactly.
 - I stopped calling the claimed vs unclaimed comparison an A/B test, switched to Welch's t-test and added an effect size.
 
