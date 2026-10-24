@@ -1,44 +1,75 @@
-Berlin Restaurant Market Analysis
-Berlin has over 6,500 restaurants. Two thirds of them have never claimed their digital presence. This project set out to understand what that actually means for ratings, customer engagement and the broader food delivery landscape in one of Europe's most competitive dining markets.
-What This Project Does
-Using TripAdvisor data covering 6,594 Berlin restaurants, this analysis works through exploratory data analysis, statistical testing and visual storytelling to answer a deceptively simple question: what separates a well-rated Berlin restaurant from a poorly-rated one?
-The findings have direct implications for food delivery platforms like Delivery Hero, Wolt and Lieferando, all of whom operate in this market.
-Key Findings
-Digital presence drives performance more than any other single factor
-Claimed restaurants rate 14% higher than unclaimed ones and attract 3.4x more customer reviews. An independent samples t-test confirmed this difference is statistically significant at p less than 0.0001. With 4,354 Berlin restaurants still unclaimed, the commercial opportunity this represents is considerable.
-Berlin diners are pragmatic, not pretentious
-Service is the strongest predictor of a high rating, marginally ahead of food quality and value. Atmosphere has almost no bearing on ratings at all. Mustafa's Gemuese Kebab, a street food stand, sits fourth in the entire city by review volume with a 4.5 average. Berlin consistently rewards authenticity over aesthetics.
-Mid-range is the most dangerous segment
-Half of all Berlin restaurants sit in the mid-range price bracket, yet both budget and fine dining establishments outrate them. The middle market is overcrowded and underdifferentiated.
-Cuisine gaps represent real acquisition opportunity
-Asian, Mediterranean and cafe concepts punch significantly above their weight on ratings relative to market share. Indian restaurants dominate the perfect 5.0 rating list. These are underserved cuisines with highly satisfied customer bases.
-Longer hours do not mean better ratings
-Open hours per week correlates negatively with average rating. Focus and quality consistently outperform availability.
-Tools and Methods
+# Berlin Restaurant Market Analysis
 
-Python, Pandas, NumPy for data cleaning and analysis
-Matplotlib, Seaborn for visualisation
-Scipy for statistical testing
-Independent samples t-test for A/B analysis
-Dataset: TripAdvisor European Restaurants via Kaggle (1M+ records, filtered to Berlin)
+Berlin has around 6,600 rated restaurants on TripAdvisor, and two thirds of them have never claimed their page. I wanted to see what separates the well-rated ones from the rest, and what that might mean for delivery platforms like Wolt, Lieferando or Delivery Hero that work with these restaurants every day.
 
-Project Structure
-berlin-restaurant-market-analysis/
-    Berlin_Restaurant_Market_Analysis.ipynb    
-    1. Berlin_Restaurant_Ratings_overview.png  
-    2. Claimed_vs_unclaimed.png                
-    3. Price_vs_Performance.png                
-    4. Cuisines_Analysis.png                   
-    5. Correlation_Matrix.png                  
-    6. AB_test.png                             
-    7. Berlin_top10_restaurants.png            
-    8. Key_insight_summary.png
-Business Recommendations
-A structured onboarding campaign targeting Berlin's 4,354 unclaimed restaurant partners would be the single highest-leverage intervention available to any food delivery platform operating here. The data makes the case with statistical certainty.
-Cuisine diversification, specifically prioritising Asian and Indian restaurant acquisition, represents the clearest secondary opportunity where customer satisfaction already runs highest.
+I spent years in kitchens and advising restaurant owners before moving into data, so this one is close to home.
 
-Author
+![Ratings overview](1_ratings_overview.png)
 
-Siddharth Suman
-Data Analyst, Berlin
-linkedin.com/in/siddharthsuman06
+## What I found
+
+**1. Claimed restaurants get far more reviews, and slightly better ratings.**
+Restaurants that have claimed their TripAdvisor page get about 3.4x more reviews (around 162 vs 48). Their average rating is 0.14 stars higher (4.25 vs 4.10). That gap is statistically clear but small: Cohen's d is around 0.2, and the two distributions overlap almost completely.
+
+This is a comparison, not an experiment. Popular restaurants may simply be more likely to claim their page, so I can't say claiming causes the difference.
+
+![Claimed vs unclaimed](2_claimed_vs_unclaimed.png)
+
+**2. Service, food and value all go together with higher ratings. Atmosphere much less so.**
+The three are about equally linked to the overall rating. Atmosphere has a much weaker link. A simple place with good service and fair prices does just as well as a beautiful one.
+
+![Correlation matrix](5_correlation_matrix.png)
+
+**3. Mid-range is the most crowded segment and rates lowest.**
+Half of all Berlin restaurants sit in the €€-€€€ band. Both budget (€) and fine dining (€€€€) rate higher on average.
+
+![Price vs performance](3_price_vs_performance.png)
+
+**4. The most common cuisines aren't the best rated.**
+European, café and German places dominate by count. Cafés, Mediterranean and Asian restaurants rate a bit higher on average. The differences are small, so I treat this as a pointer rather than a ranking.
+
+![Cuisines](4_cuisines.png)
+
+**5. Berlin doesn't need white tablecloths.**
+Mustafa's Gemuese Kebab, a cheap street food stand, is the fourth most-reviewed restaurant in the city, with over 4,300 reviews and a 4.5 rating.
+
+## What I'd recommend to a delivery platform
+
+- The review gap is the bigger story. Helping restaurant partners claim and manage their profiles looks worthwhile, but the honest way to find out is a small pilot: offer onboarding support to a random half of unclaimed partners and compare after a few months.
+- When coaching partners, start with service and value for money rather than decor or longer opening hours.
+
+## What I changed in October 2026
+
+I went back through the notebook and fixed a few things. The notebook has a note at each fix:
+
+- I originally wrote that claimed restaurants rate "14% higher". The gap is 0.14 stars, which is about 3.5%.
+- The Berlin filter was also picking up a town called Berlingen.
+- I had filled missing food, service, value and atmosphere scores with the median before running correlations. About half were missing, so that flattened the results. Now the correlations only use real scores.
+- Cuisine matching used partial text matches, so "European" also counted "Central European". It now matches exactly.
+- I stopped calling the claimed vs unclaimed comparison an A/B test, switched to Welch's t-test and added an effect size.
+
+## How to run it
+
+1. Download `tripadvisor_european_restaurants.csv` from [Kaggle (TripAdvisor European Restaurants)](https://www.kaggle.com/datasets/stefanoleone992/tripadvisor-european-restaurants).
+2. Put it in a folder called `data/` next to the notebook (or in your Google Drive if you use Colab).
+3. Install the packages and open the notebook:
+
+```bash
+pip install -r requirements.txt
+jupyter notebook Berlin_Restaurant_Market_Analysis.ipynb
+```
+
+## Tools
+
+Python, pandas, NumPy, Matplotlib, Seaborn, SciPy (Welch's t-test, Cohen's d, confidence intervals).
+
+## Limitations
+
+- Everything here is correlation. Nothing was randomised.
+- TripAdvisor leans towards tourists, so local favourites may be under-represented.
+- Ratings are rounded to half stars, which hides a lot of variation.
+
+## Author
+
+Siddharth Suman, Data Analyst, Berlin
+[LinkedIn](https://www.linkedin.com/in/siddharthsuman06)
